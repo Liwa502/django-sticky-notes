@@ -1,0 +1,59 @@
+{% extends 'notes/base.html' %}
+{# Inherits the base template so we maintain the site's layout and styling #}
+
+{% block title %}{{ action }} Note{% endblock %}
+{# Dynamically sets the browser tab title based on the "action" variable (e.g., Create, Edit) #}
+
+{% block content %}
+<h2>{{ action }} Note</h2>
+{# Page heading that changes depending on whether we’re creating or editing a note #}
+
+<form method="post" novalidate>
+  {% csrf_token %}
+  {# CSRF protection for secure form submission #}
+
+  {{ form.non_field_errors }}
+  {# Displays form-level errors not tied to a specific field #}
+  
+  <div class="mb-3">
+    {{ form.title.label_tag }}
+    {# Renders the label for the title field #}
+    
+    {{ form.title }}
+    {# Renders the title input field #}
+    
+    {{ form.title.errors }}
+    {# Shows any validation errors for the title field #}
+  </div>
+
+  <div class="mb-3">
+    {{ form.content.label_tag }}
+    {# Renders the label for the content field #}
+    
+    {{ form.content }}
+    {# Renders the content text area #}
+    
+    {{ form.content.errors }}
+    {# Shows validation errors for the content field #}
+  </div>
+
+  <div class="mb-3">
+    <label for="id_due_date" class="form-label">Due Date</label>
+    {# Custom label for the due date input #}
+    
+    <input type="date" id="id_due_date" name="due_date" class="form-control" value="{{ form.due_date.value|default_if_none:'' }}">
+    {# HTML5 date picker for selecting a due date, prefilled with existing value if present #}
+    
+    {% if form.due_date.errors %}
+      <div class="text-danger small">{{ form.due_date.errors }}</div>
+      {# Displays due date validation errors in small red text #}
+    {% endif %}
+  </div>
+
+  <button type="submit" class="btn btn-primary">{{ action }}</button>
+  {# Submit button with the label matching the action (Create or Edit) #}
+  
+  <a href="{% url 'note_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+  {# Cancel button that redirects back to the note list page without saving changes #}
+</form>
+{% endblock %}

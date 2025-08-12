@@ -1,0 +1,141 @@
+/* ---------------------- */
+/* Highlight for pinned notes */
+/* ---------------------- */
+.note-pinned {
+  border: 2px solid #ff6b6b; /* Red border for pinned notes */
+  background-color: #fff0f0; /* Light red background */
+}
+
+/* ---------------------- */
+/* Dark mode general styles */
+/* ---------------------- */
+body.dark-mode {
+  background-color: #000000; /* Black background */
+  color: #ff4d4d; /* Bright red text for general content */
+}
+
+/* ---------------------- */
+/* Header and footer in dark mode */
+/* ---------------------- */
+body.dark-mode .app-header,
+body.dark-mode .app-footer {
+  background-color: #000000; /* Black header/footer background */
+  border-color: #ff0000; /* Bright red borders */
+  color: #ff4d4d; /* Bright red text */
+}
+
+/* ---------------------- */
+/* App title in dark mode */
+/* ---------------------- */
+body.dark-mode .app-title {
+  color: #ff4d4d !important; /* Bright red title text */
+}
+
+/* ---------------------- */
+/* Note cards in dark mode */
+/* ---------------------- */
+body.dark-mode .note-card {
+  background-color: #111111; /* Dark gray background */
+  box-shadow: 0 4px 12px rgba(255, 77, 77, 0.4); /* Red-tinted shadow */
+  color: #ff4d4d; /* Bright red text */
+}
+
+/* Note title color */
+body.dark-mode .note-title {
+  color: #ff4d4d;
+}
+
+/* Note content text color */
+body.dark-mode .note-content {
+  color: #ff9999; /* Light red for content */
+}
+
+/* ---------------------- */
+/* Primary buttons in dark mode */
+/* ---------------------- */
+body.dark-mode .btn-primary,
+body.dark-mode .btn-outline-primary {
+  background-color: #ff0000; /* Bright red background */
+  border-color: #ff0000; /* Bright red border */
+  color: black; /* Black text for contrast */
+}
+
+/* Hover and focus effects for primary buttons */
+body.dark-mode .btn-primary:hover,
+body.dark-mode .btn-outline-primary:hover,
+body.dark-mode .btn-primary:focus,
+body.dark-mode .btn-outline-primary:focus {
+  background-color: #cc0000; /* Darker red on hover/focus */
+  border-color: #cc0000;
+  color: black;
+}
+
+/* ---------------------- */
+/* Secondary and danger outline buttons in dark mode */
+/* ---------------------- */
+body.dark-mode .btn-outline-secondary,
+body.dark-mode .btn-outline-danger {
+  color: #ff4d4d; /* Bright red text */
+  border-color: #ff4d4d; /* Bright red border */
+}
+
+/* Hover effects for secondary and danger outline buttons */
+body.dark-mode .btn-outline-secondary:hover,
+body.dark-mode .btn-outline-danger:hover {
+  background-color: #ff4d4d; /* Fill red on hover */
+  color: black; /* Black text on hover */
+}
+
+/* ---------------------- */
+/* Form controls in dark mode */
+/* ---------------------- */
+body.dark-mode .form-control {
+  background-color: #222222; /* Dark background for input fields */
+  border-color: #ff4d4d; /* Bright red border */
+  color: #ff9999; /* Light red text */
+}
+
+/* Focus effect for form controls */
+body.dark-mode .form-control:focus {
+  border-color: #ff0000; /* Bright red border on focus */
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5); /* Red glow */
+  background-color: #222222;
+  color: #ff9999;
+}
+
+/* ---------------------- */
+/* Search input width */
+/* ---------------------- */
+#search-input {
+  width: 200px; /* Fixed search bar width */
+}
+
+/* ---------------------- */
+/* Dropdown menu in dark mode */
+/* ---------------------- */
+body.dark-mode .dropdown-menu {
+  background-color: #111111; /* Dark gray menu background */
+  color: #ff4d4d; /* Bright red text */
+  border: 1px solid #ff0000; /* Bright red border */
+}
+
+/* Form control inside dropdown in dark mode */
+body.dark-mode .dropdown-menu input.form-control {
+  background-color: #222222; /* Dark background */
+  color: #ff9999; /* Light red text */
+  border-color: #ff4d4d; /* Bright red border */
+}
+
+/* Primary button inside dropdown menu */
+body.dark-mode .dropdown-menu .btn-primary {
+  background-color: #ff0000; /* Bright red background */
+  border-color: #ff0000; /* Bright red border */
+  color: black; /* Black text */
+}
+
+/* Hover effect for dropdown's primary button */
+body.dark-mode .dropdown-menu .btn-primary:hover {
+  background-color: #cc0000; /* Darker red on hover */
+  border-color: #cc0000;
+  color: black;
+}

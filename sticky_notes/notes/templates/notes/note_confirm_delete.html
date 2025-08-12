@@ -1,0 +1,33 @@
+{% extends 'notes/base.html' %}
+{# This extends the base layout so we keep a consistent header, footer, and styling #}
+
+{% block title %}Delete Note{% endblock %}
+{# Sets the title in the browser tab to "Delete Note" #}
+
+{% block content %}
+<h2 class="mb-3 text-danger">Delete Note</h2>
+{# Page heading for deleting a note, styled with Bootstrap text-danger for emphasis #}
+
+<div class="alert alert-warning" role="alert">
+  {# A Bootstrap warning alert to visually warn the user about the action #}
+  Are you sure you want to delete the note titled 
+  <strong>"{{ note.title }}"</strong>?
+  {# Displays the title of the note to confirm the correct note is being deleted #}
+</div>
+
+{% if note.content %}
+<p><em>Preview:</em> {{ note.content|truncatewords:20 }}</p>
+{# If the note has content, show the first 20 words so the user knows what’s inside #}
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  {# CSRF token is required for security to prevent cross-site request forgery attacks #}
+  
+  <button type="submit" class="btn btn-danger">Yes, Delete</button>
+  {# Red delete button to confirm deletion #}
+  
+  <a href="{% url 'note_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+  {# Cancel button redirects the user back to the list of notes without deleting #}
+</form>
+{% endblock %}

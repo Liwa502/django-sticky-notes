@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Sticky Notes{% endblock %}</title>
+
+  <!-- Bootstrap CSS (CDN link for quick styling setup) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS file for extra styles -->
+  <link rel="stylesheet" href="{% static 'notes/styles.css' %}" />
+</head>
+<body>
+
+  <!-- ===== HEADER SECTION ===== -->
+  <header class="app-header shadow-sm">
+    <div class="container d-flex align-items-center justify-content-between py-3">
+      <!-- App Title -->
+      <h1 class="app-title mb-0">Sticky Notes</h1>
+      
+      <!-- Right-side header controls -->
+      <div class="d-flex align-items-center gap-3">
+        <!-- Search bar for filtering notes -->
+        <input type="search" id="search-input" class="form-control form-control-sm" placeholder="Search notes..." aria-label="Search notes" />
+
+        <!-- Dark mode toggle button -->
+        <button id="dark-mode-toggle" class="btn btn-outline-secondary btn-sm" title="Toggle Dark Mode">🌙</button>
+
+        <!-- User menu dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <span id="username-display">Guest</span>
+          </button>
+
+          <!-- Dropdown content for entering and saving username -->
+          <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="userMenuButton" style="min-width: 200px;">
+            <label for="username-input" class="form-label mb-1">Enter your name:</label>
+            <input type="text" id="username-input" class="form-control form-control-sm mb-2" placeholder="Your name" />
+            <button id="save-username-btn" class="btn btn-primary btn-sm w-100">Save</button>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="container my-4">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- ===== FOOTER SECTION ===== -->
+  <footer class="app-footer text-center py-3">
+    <small>&copy; {% now "Y" %} Sticky Notes App</small>
+  </footer>
+
+  <!-- Bootstrap JS Bundle (includes Popper for dropdowns) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===== CUSTOM SCRIPT SECTION ===== -->
+  <script>
+    /* === Dark Mode Functionality === */
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    // Apply or remove dark mode styles
+    function applyDarkMode(enabled) {
+      if (enabled) {
+        body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☀️';
+        localStorage.setItem('darkMode', 'enabled'); // Save setting
+      } else {
+        body.classList.remove('dark-mode');
+        darkModeToggle.textContent = '🌙';
+        localStorage.setItem('darkMode', 'disabled'); // Save setting
+      }
+    }
+
+    // Toggle dark mode on button click
+    darkModeToggle.addEventListener('click', () => {
+      const enabled = body.classList.contains('dark-mode');
+      applyDarkMode(!enabled);
+    });
+
+    // Apply saved dark mode preference on page load
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      applyDarkMode(true);
+    }
+
+    /* === Username Save & Display === */
+    const usernameInput = document.getElementById('username-input');
+    const saveUsernameBtn = document.getElementById('save-username-btn');
+    const usernameDisplay = document.getElementById('username-display');
+
+    // Load saved username from localStorage
+    function loadUsername() {
+      const saved = localStorage.getItem('username');
+      if (saved) {
+        usernameDisplay.textContent = saved;
+        usernameInput.value = saved;
+      }
+    }
+
+    // Save username and update display
+    saveUsernameBtn.addEventListener('click', () => {
+      const name = usernameInput.value.trim();
+      if (name.length > 0) {
+        localStorage.setItem('username', name);
+        usernameDisplay.textContent = name;
+        // Close dropdown using Bootstrap API
+        const dropdownElement = document.getElementById('userMenuButton');
+        const dropdown = bootstrap.Dropdown.getInstance(dropdownElement);
+        dropdown.hide();
+      }
+    });
+
+    // Load username when page loads
+    loadUsername();
+
+    /* === Search Notes Functionality === */
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      document.querySelectorAll('.note-card').forEach(card => {
+        const title = card.querySelector('.note-title').textContent.toLowerCase();
+        card.style.display = title.includes(query) ? '' : 'none';
+      });
+    });
+  </script>
+  
+</body>
+</html>
