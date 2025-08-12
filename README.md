@@ -1,5 +1,3 @@
-# django-sticky-notes
-Simple Django Sticky Notes app
 # Django Sticky Notes
 
 A simple Django web app to create, update, delete, and pin sticky notes.
